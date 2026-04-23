@@ -44,8 +44,8 @@ func RunServe(args []string) (int, error) {
 	}
 
 	opts := press.ServeOptions{
-		ServeDir: *dir,
-		Addr:     *addr,
+		Dir:  *dir,
+		Addr: *addr,
 	}
 
 	if err := press.Serve(opts); err != nil {
