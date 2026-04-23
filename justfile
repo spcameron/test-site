@@ -46,6 +46,37 @@ mod-upgrade:
 test mode="":
     @scripts/test {{mode}}
 
+# builds command binary with native target
+[group('build')]
+build-cli:
+    @scripts/build
+
+# builds command binary with linux_amd64 target
+[group('build')]
+build-linux:
+    @scripts/build linux_amd64
+
+# builds the site pages
+[group('build')]
+build-site:
+    @scripts/build-site
+
+# builds command binary, builds the site pages
+[group('build')]
+build-all:
+    @scripts/build
+    @scripts/build-site
+
+# build site output and serve locally (single run)
+[group('run')]
+run *args="":
+    @scripts/serve --build -- {{args}}
+
+# start live development server (auto-rebuild on change)
+[group('run')]
+run-live:
+    @air -c .air.toml
+
 # sync main and delete local branch (for branches with no PR)
 [group('git')]
 branch-delete:
