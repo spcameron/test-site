@@ -4,3 +4,5 @@ github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/spcameron/press v0.0.0-20260423130852-b7b7cafaf950 h1:BDLRqmW3kOxHQzbZOkPbVEHal9HD1WMkixuExikQHs0=
 github.com/spcameron/press v0.0.0-20260423130852-b7b7cafaf950/go.mod h1:hEJlWr0po4egfqPVLRF77fz94qx8ZlDzzQj3Nu4Z2Ko=
+github.com/spcameron/press v0.0.0-20260423165023-d483323f1b27 h1:HrU4GRIuIAw7mfXU8rhd1xRqkmwe0soxxvDrLM4KqY0=
+github.com/spcameron/press v0.0.0-20260423165023-d483323f1b27/go.mod h1:hEJlWr0po4egfqPVLRF77fz94qx8ZlDzzQj3Nu4Z2Ko=
