@@ -1,0 +1,12 @@
+package templates
+
+import "github.com/spcameron/press"
+
+templ Home(data press.HomePageData) {
+	@Base("Home", HomeContent(data))
+}
+
+templ HomeContent(data press.HomePageData) {
+	<h2>Welcome</h2>
+	<p>This is my site.</p>
+}

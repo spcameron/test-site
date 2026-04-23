@@ -1,0 +1,17 @@
+package site
+
+import (
+	"context"
+	"io"
+
+	"github.com/spcameron/press"
+	"github.com/spcameron/test-site/templates"
+)
+
+func Renderers() press.Renderers {
+	return press.Renderers{
+		Home: func(w io.Writer, data press.HomePageData) error {
+			return templates.Home(data).Render(context.Background(), w)
+		},
+	}
+}

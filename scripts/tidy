@@ -15,18 +15,26 @@ tidy() {
   ok "... complete."
 }
 
-format() {
+go_format() {
   info "Running go fmt..."
   go fmt ./...
   ok "... complete."
 }
 
+templ_format() {
+  info "Running templ fmt..."
+  templ fmt "$ROOT_DIR/templates/"
+  ok "... complete."
+}
+
 main() {
   need_cmd go
+  need_cmd templ
 
   info "Cleaning up project..."
   tidy
-  format
+  go_format
+  templ_format
   ok "... cleanup complete."
 }
 
