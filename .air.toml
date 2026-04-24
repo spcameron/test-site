@@ -1,0 +1,46 @@
+# .air.toml
+# Static site dev loop:
+# - Rebuild site output via scripts/build-site
+# - Restart preview server via scripts/serve
+
+root = "."
+tmp_dir = "tmp"
+
+[build]
+# Rebuild static site output
+cmd = "scripts/build-site"
+
+# Long-running preview server (restarted after each successful build)
+entrypoint = ["scripts/serve"]
+
+# What to watch
+include_ext = [
+  "go",
+  "html", "tpl", "tmpl",
+  "css", "scss",
+  "js", "ts",
+  "md",
+  "jpeg", "jpg", "gif", "png", "bmp", "svg", "webp", "ico"
+]
+
+# What to ignore
+exclude_dir = ["tmp", ".git", "vendor", "node_modules", "build"]
+exclude_regex = ["_test\\.go"]
+exclude_unchanged = true
+
+# Debounce rapid changes (templ can touch multiple files)
+delay = 100
+
+# If build fails, do not restart server
+stop_on_error = true
+
+[log]
+time = true
+main_only = false
+
+[screen]
+clear_on_rebuild = true
+keep_scroll = true
+
+[misc]
+clean_on_exit = true
