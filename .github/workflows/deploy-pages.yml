@@ -24,7 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: go run ./cmd/site build --out build/public
+      - run: go run ./cmd/site build-site --out build/public
 
       - uses: actions/upload-pages-artifact@v4
         with:
