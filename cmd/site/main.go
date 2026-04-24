@@ -19,14 +19,10 @@ func main() {
 
 	switch os.Args[1] {
 	case "build":
-		written, code, err := commands.RunBuild(os.Args[2:])
+		code, err := commands.RunBuild(os.Args[2:])
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%v\n", err)
 			os.Exit(code)
-		}
-
-		for _, v := range written {
-			fmt.Printf("build: wrote %s\n", v)
 		}
 
 	case "serve":

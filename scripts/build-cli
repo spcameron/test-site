@@ -10,6 +10,8 @@ ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT_DIR/scripts/lib/lib.sh"
 source "$ROOT_DIR/scripts/lib/paths.sh"
 
+derive_binary_paths
+
 usage() {
   cat >&2 <<EOF
 Usage:

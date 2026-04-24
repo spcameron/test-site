@@ -1,2 +1,2 @@
-app = "test-site"
+app = "site"
 kind = "cli"

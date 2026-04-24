@@ -9,27 +9,53 @@ import (
 	"github.com/spcameron/test-site/internal/site"
 )
 
-func RunBuild(args []string) ([]string, int, error) {
+func RunBuild(args []string) (int, error) {
 	fs := flag.NewFlagSet("build", flag.ContinueOnError)
 	fs.SetOutput(os.Stderr)
 
 	out := fs.String("out", "build/public", "output directory")
+	static := fs.String("static", "static", "static assets directory")
+	assets := fs.String("assets", "assets", "output assets base path")
+
+	cleanFlag := fs.Bool("clean", false, "clean output directory before building")
+	noCleanFlag := fs.Bool("no-clean", false, "do not clean output directory before building")
+
 	if err := fs.Parse(args); err != nil {
-		return nil, 2, err
+		return 2, err
+	}
+
+	if fs.NArg() != 0 {
+		return 2, fmt.Errorf("unexpected build argument: %s", fs.Arg(0))
+	}
+
+	clean := true
+	switch {
+	case *cleanFlag && *noCleanFlag:
+		return 2, fmt.Errorf("cannot specify both --clean and --no-clean")
+	case *cleanFlag:
+		clean = true
+	case *noCleanFlag:
+		clean = false
 	}
 
 	opts := press.BuildOptions{
-		OutDir: *out,
+		OutDir:         *out,
+		Clean:          clean,
+		StaticDir:      *static,
+		AssetsBasePath: *assets,
+		OnWrite: func(p string) {
+			fmt.Printf("build: wrote %s\n", p)
+		},
 	}
 
 	r := site.Renderers()
 
-	written, err := press.Build(opts, r)
+	err := press.Build(opts, r)
 	if err != nil {
-		return nil, 1, fmt.Errorf("build: %w", err)
+		return 1, fmt.Errorf("build: %w", err)
 	}
 
-	return written, 0, nil
+	return 0, nil
 }
 
 func RunServe(args []string) (int, error) {

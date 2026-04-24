@@ -49,12 +49,12 @@ test mode="":
 # builds command binary with native target
 [group('build')]
 build-cli:
-    @scripts/build
+    @scripts/build-cli
 
 # builds command binary with linux_amd64 target
 [group('build')]
 build-linux:
-    @scripts/build linux_amd64
+    @scripts/build-cli linux_amd64
 
 # builds the site pages
 [group('build')]
@@ -64,7 +64,7 @@ build-site:
 # builds command binary, builds the site pages
 [group('build')]
 build-all:
-    @scripts/build
+    @scripts/build-cli
     @scripts/build-site
 
 # build site output and serve locally (single run)
