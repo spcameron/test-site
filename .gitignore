@@ -23,6 +23,7 @@ __debug_bin*
 # Module download cache (never commit)
 pkg/
 bin/
+tmp/
 *.
 
 # Go toolchain state (never commit)
