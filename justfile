@@ -67,14 +67,14 @@ build-all:
     @scripts/build-cli
     @scripts/build-site
 
-# build site output and serve locally (single run)
-[group('run')]
-run *args="":
+# build site output and serve locally
+[group('preview')]
+serve *args="":
     @scripts/serve --build -- {{args}}
 
 # start live development server (auto-rebuild on change)
-[group('run')]
-run-live:
+[group('preview')]
+serve-live:
     @air -c .air.toml
 
 # sync main and delete local branch (for branches with no PR)
