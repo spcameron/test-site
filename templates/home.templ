@@ -3,7 +3,7 @@ package templates
 import "github.com/spcameron/press"
 
 templ Home(data press.HomePageData) {
-	@Base("Home", HomeContent(data))
+	@Base(data.Page, HomeContent(data))
 }
 
 templ HomeContent(data press.HomePageData) {

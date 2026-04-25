@@ -1,12 +1,14 @@
 package templates
 
-templ Base(title string, content templ.Component) {
+import "github.com/spcameron/press"
+
+templ Base(page press.PageData, content templ.Component) {
 	<!DOCTYPE html>
 	<html>
 		<head>
 			<meta charset="utf-8"/>
-			<title>{ title }</title>
-			<link rel="stylesheet" href="/css/styles.css"/>
+			<title>{ page.Title }</title>
+			<link rel="stylesheet" href="{ page.Site.StylesheetURL }"/>
 		</head>
 		<body>
 			@SiteHeader()

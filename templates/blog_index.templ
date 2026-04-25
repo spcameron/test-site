@@ -1,0 +1,22 @@
+package templates
+
+import "github.com/spcameron/press"
+
+templ BlogIndex(data press.BlogIndexPageData) {
+	@Base(data.Page, BlogIndexContent(data.Posts))
+}
+
+templ BlogIndexContent(posts []press.Post) {
+	<h2>Blog</h2>
+	if len(posts) == 0 {
+		<p>No posts yet.</p>
+	} else {
+		<ul>
+			for _, p := range posts {
+				<li>
+					<a href={ p.URL }>{ p.Title }</a>
+				</li>
+			}
+		</ul>
+	}
+}

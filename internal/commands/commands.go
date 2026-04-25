@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spcameron/press"
 	"github.com/spcameron/test-site/internal/site"
@@ -14,6 +15,7 @@ func RunBuild(args []string) (int, error) {
 	fs.SetOutput(os.Stderr)
 
 	out := fs.String("out", "build/public", "output directory")
+	content := fs.String("content", "content", "content directory")
 	static := fs.String("static", "static", "static assets directory")
 	assets := fs.String("assets", "assets", "output assets base path")
 
@@ -41,6 +43,7 @@ func RunBuild(args []string) (int, error) {
 	opts := press.BuildOptions{
 		OutDir:         *out,
 		Clean:          clean,
+		ContentDir:     *content,
 		StaticDir:      *static,
 		AssetsBasePath: *assets,
 		OnWrite: func(p string) {
@@ -48,9 +51,15 @@ func RunBuild(args []string) (int, error) {
 		},
 	}
 
+	siteData := press.SiteData{
+		// NOTE: UPDATE WITH SITE NAME
+		Title:         "test-site",
+		StylesheetURL: "/" + strings.Trim(*assets, "/") + "/css/styles.css",
+	}
+
 	r := site.Renderers()
 
-	err := press.Build(opts, r)
+	err := press.Build(opts, siteData, r)
 	if err != nil {
 		return 1, fmt.Errorf("build: %w", err)
 	}

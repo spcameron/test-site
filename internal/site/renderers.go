@@ -13,5 +13,11 @@ func Renderers() press.Renderers {
 		Home: func(w io.Writer, data press.HomePageData) error {
 			return templates.Home(data).Render(context.Background(), w)
 		},
+		BlogIndex: func(w io.Writer, data press.BlogIndexPageData) error {
+			return templates.BlogIndex(data).Render(context.Background(), w)
+		},
+		BlogPost: func(w io.Writer, data press.BlogPostPageData) error {
+			return templates.BlogPost(data).Render(context.Background(), w)
+		},
 	}
 }

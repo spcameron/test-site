@@ -4,5 +4,10 @@ go 1.26.2
 
 require (
 	github.com/a-h/templ v0.3.1001
-	github.com/spcameron/press v0.0.0-20260424031254-d803e66894a8
+	github.com/spcameron/press v0.0.0-20260425145833-aa046cf476ed
+)
+
+require (
+	github.com/spcameron/scribe v0.1.1 // indirect
+	go.yaml.in/yaml/v3 v3.0.4 // indirect
 )
