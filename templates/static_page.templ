@@ -1,0 +1,14 @@
+package templates
+
+import "github.com/spcameron/press"
+
+templ StaticPage(data press.StaticPageData) {
+	@Base(data.Page, StaticPageContent(data.StaticPage))
+}
+
+templ StaticPageContent(p press.StaticPage) {
+	<article>
+		<h2>{ p.Title }</h2>
+		@MarkdownHTML(p.Body)
+	</article>
+}

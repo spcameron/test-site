@@ -19,5 +19,8 @@ func Renderers() press.Renderers {
 		BlogPost: func(w io.Writer, data press.BlogPostPageData) error {
 			return templates.BlogPost(data).Render(context.Background(), w)
 		},
+		StaticPage: func(w io.Writer, data press.StaticPageData) error {
+			return templates.StaticPage(data).Render(context.Background(), w)
+		},
 	}
 }
