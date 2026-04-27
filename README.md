@@ -19,7 +19,7 @@ The site is built from:
 
 The build process is handled by `press`, which is responsible for:
 
-- discovering and parsing posts
+- discovering and parsing content (posts and static pages)
 - generating routes
 - rendering templates
 - writing output and syncing assets
@@ -27,6 +27,20 @@ The build process is handled by `press`, which is responsible for:
 ---
 
 ## Development
+
+### Build
+
+```bash
+just build-site
+```
+
+Builds the static site output in `build/public/`.
+
+```bash
+just build-all
+```
+
+Builds the site and any associated binaries (e.g. CLI tools) for the repository.
 
 ### Build and serve
 
@@ -54,6 +68,9 @@ content/
     my-post/
       index.md
       media/
+  pages/
+    about/
+      index.md
 
 templates/
   base.templ
@@ -65,7 +82,7 @@ internal/site/
   renderers.go
 ```
 
-- **content/**: Markdown posts with frontmatter
+- **content/**: Markdown content (posts and static pages)
 - **templates/**: templ components for HTML rendering
 - **internal/site/**: adapters connecting templates to `press`
 
@@ -84,6 +101,8 @@ These map structured page data to templ components.
 ---
 
 ## Content
+
+### Posts
 
 Each post lives in:
 
@@ -107,6 +126,25 @@ Optional media can be placed in:
 content/posts/{slug}/media/
 ```
 
+### Static pages
+
+Each static page lives in:
+
+```
+content/pages/{slug}/index.md
+```
+
+With frontmatter:
+
+```yaml
+---
+title: My Page
+slug: my-page
+---
+```
+
+
+
 ---
 
 ## Output
@@ -127,6 +165,8 @@ With structure:
     {slug}/
       index.html
       media/
+  {slug}/
+    index.html
   assets/
 ```
 
@@ -176,7 +216,7 @@ Update `templates/nav.templ` to reflect the structure of the site:
 </nav>
 ```
 
-Add or remove sections as needed.
+Static pages (e.g. `/about/`, `/teaching/`) must be linked manually. Add or remove sections as needed.
 
 ### 3. Content
 
@@ -224,5 +264,5 @@ Replace or extend `static/css/styles.css`
 
 ### Notes
 
-`press` defines the site structure and build pipeline; this repo defines presentation and content. Preserve this boundary when adapting.
+`press` defines the content model and build pipeline; this repository defines presentation and content. Preserve this boundary when adapting.
 
