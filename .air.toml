@@ -1,14 +1,16 @@
 # .air.toml
 # Static site dev loop:
-# - Rebuild site output via scripts/build-site
-# - Restart preview server via scripts/serve
+# - Build CLI
+# - Build Tailwind CSS
+# - Build site output
+# - Restart preview server
 
 root = "."
 tmp_dir = "tmp"
 
 [build]
-cmd = "scripts/build-site && go build -o ./tmp/site ./cmd/site"
-entrypoint = ["./tmp/site", "serve"]
+cmd = "scripts/build-cli && scripts/build-css && scripts/build-site"
+entrypoint = ["./tmp/bin/site", "serve"]
 
 include_ext = [
   "go",

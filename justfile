@@ -56,6 +56,11 @@ build-cli:
 build-linux:
     @scripts/build-cli linux_amd64
 
+# builds the stylesheets using TailwindCSS
+[group('build')]
+build-css:
+    @scripts/build-css
+
 # builds the site pages
 [group('build')]
 build-site:
@@ -65,6 +70,7 @@ build-site:
 [group('build')]
 build-all:
     @scripts/build-cli
+    @scripts/build-css
     @scripts/build-site
 
 # build site output and serve locally

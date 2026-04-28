@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+#
+# scripts/build-css
+
+set -euo pipefail
+
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+
+source "$ROOT_DIR/scripts/lib/lib.sh"
+
+usage() {
+  cat >&2 <<EOF
+Usage:
+  scripts/build-css
+
+Builds Tailwind CSS:
+  in:  $ROOT_DIR/static/css/tailwind.css
+  out: $ROOT_DIR/static/css/styles.css
+EOF
+}
+
+main() {
+  if [[ $# -gt 0 ]]; then
+    case "$1" in
+    -h | --help | help)
+      usage
+      exit 0
+      ;;
+    *)
+      usage
+      die "Unknown argument: $1"
+      ;;
+    esac
+  fi
+
+  need_cmd tailwindcss
+
+  local input="$ROOT_DIR/static/css/tailwind.css"
+  local output="$ROOT_DIR/static/css/styles.css"
+
+  require_dir "$ROOT_DIR/templates" "Refusing: templates dir not found"
+  require_dir "$ROOT_DIR/static" "Refusing: static dir not found"
+  require_file "$input" "Refusing: Tailwind input file not found: $input"
+
+  mkdir -p "$(dirname "$output")"
+
+  info "Building Tailwind CSS..."
+  tailwindcss \
+    -i "$input" \
+    -o "$output"
+
+  ok "... CSS written to $output."
+}
+
+main "$@"
