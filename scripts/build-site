@@ -42,6 +42,8 @@ main() {
   fi
 
   local out_dir="$ROOT_DIR/build/public"
+  # TODO: uncomment when deploying with custom domain name
+  # local cname_domain="www.test-site.com"
 
   # Guardrails
   require_dir "$ROOT_DIR/content" "Refusing: content dir not found"
@@ -67,6 +69,10 @@ main() {
       "$@"
   fi
 
+  # TODO: uncomment when deploying with custom domain name
+  # printf '%s\n' "$cname_domain" >"$out_dir/CNAME"
+  #
+  # ok "... custom domain written to $out_dir/CNAME."
   ok "... site output written to $out_dir."
 }
 
